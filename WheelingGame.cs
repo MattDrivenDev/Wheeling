@@ -4,21 +4,27 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Wheeling;
 
-public class Game1 : Game
+public class WheelingGame : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private Regiment _regiment;
 
-    public Game1()
+    public WheelingGame()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
+        IsMouseVisible = false;
     }
 
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
+        _graphics.PreferredBackBufferWidth = 1680;
+        _graphics.PreferredBackBufferHeight = 1050;
+        GraphicsDevice.SetRenderTarget(new RenderTarget2D(GraphicsDevice, 1680, 1050));
+        _graphics.IsFullScreen = true;
+        _graphics.ApplyChanges();
 
         base.Initialize();
     }
@@ -28,6 +34,12 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
+        TexturePack.Load(Content);
+
+        _regiment = new Regiment(
+            position: new Vector2(960, 540),
+            size: 20,
+            frontage: 5);
     }
 
     protected override void Update(GameTime gameTime)
@@ -36,15 +48,21 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
+        _regiment.Update(gameTime);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Green);
 
         // TODO: Add your drawing code here
+        _spriteBatch.Begin();
+
+        _regiment.Draw(_spriteBatch);
+
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }

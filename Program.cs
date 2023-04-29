@@ -1,3 +1,3 @@
 ﻿
-using var game = new Wheeling.Game1();
+using var game = new Wheeling.WheelingGame();
 game.Run();
