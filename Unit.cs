@@ -9,10 +9,10 @@ public class Unit
 {
     private Vector2 _position;
     private Single _rotation;
-    private Single _moveInterval = 100f;
-    private Double _lastMoveTime;
     public static Int32 Width = TexturePack.Unit.Width;
     public static Int32 Height = TexturePack.Unit.Height;
+    public Vector2 Position => _position;
+    public Single Rotation => _rotation;
 
     public Unit(Vector2 position)
     {
@@ -21,35 +21,22 @@ public class Unit
 
     public void Update(GameTime gameTime)
     {
-        var totalTime = _lastMoveTime + gameTime.TotalGameTime.TotalMilliseconds;
-        if (totalTime > _moveInterval)
-        {
-            Move();
-            _lastMoveTime = 0f;
-        }
-        else
-        {
-            _lastMoveTime = totalTime;
-        }
+        
+    }
+
+    public void Rotate(Single rotation)
+    {
+        _rotation += rotation;
+    }
+
+    public void Move(Vector2 position)
+    {
+        _position = position;
     }
 
     private void Move()
     {
-        if (Keyboard.GetState().IsKeyDown(Keys.Left))
-        {
-            _rotation -= 0.1f;
-        }
         
-        if (Keyboard.GetState().IsKeyDown(Keys.Right))
-        {
-            _rotation += 0.1f;
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.Up))
-        {
-            _position.X += (Single)Math.Sin(_rotation) * 5f;
-            _position.Y -= (Single)Math.Cos(_rotation) * 5f;
-        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
