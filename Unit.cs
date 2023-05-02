@@ -45,7 +45,7 @@ public class Unit
             texture: TexturePack.Unit,
             position: _position,
             sourceRectangle: new Rectangle(0, 0, Width, Height),
-            origin: new Vector2(Width / 2f, Height / 2f),
+            origin: new Vector2(0, 0),
             color: Color.White,
             rotation: _rotation,
             scale: 1f,

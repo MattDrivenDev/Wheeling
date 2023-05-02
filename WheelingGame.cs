@@ -14,7 +14,7 @@ public class WheelingGame : Game
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = false;
+        IsMouseVisible = true;
     }
 
     protected override void Initialize()
@@ -23,7 +23,7 @@ public class WheelingGame : Game
         _graphics.PreferredBackBufferWidth = 1680;
         _graphics.PreferredBackBufferHeight = 1050;
         GraphicsDevice.SetRenderTarget(new RenderTarget2D(GraphicsDevice, 1680, 1050));
-        _graphics.IsFullScreen = true;
+        _graphics.IsFullScreen = false;
         _graphics.ApplyChanges();
 
         base.Initialize();
@@ -40,6 +40,7 @@ public class WheelingGame : Game
             position: new Vector2(960, 540),
             size: 20,
             frontage: 5);
+        _regiment.Select();
     }
 
     protected override void Update(GameTime gameTime)
